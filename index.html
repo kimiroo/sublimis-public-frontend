@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EDM 엔드포인트 정책 공개 페이지</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spoqa-han-sans@3.3.0/css/SpoqaHanSansNeo.min.css">
+    <style>button,input[type=password]{font-size:1rem;padding:10px 20px;display:inline-block}.link-grey,.link-grey:active,.link-grey:hover,.link-grey:visited,button{text-decoration:none}header,header button,header input,.wrapper button{font-family:"Spoqa Han Sans Neo","Spoqa Han Sans JP",sans-serif}body{margin:0}header{height:60px!important;display:flex;align-items:center;justify-content:space-between;background:#ddd;color:#333}input[type=password]{margin:8px 0;border:1px solid #ccc;border-radius:4px;box-sizing:border-box}button{background-color:#707070;border:none;color:#fff;text-align:center;border-radius:4px;cursor:pointer}table,td,th{border:1px solid #000;border-collapse:collapse;margin:1rem}header .submit-area,header .title-area{padding-right:20px;padding-left:20px}header .title-area{display:flex;font-size:1.6rem}.link-home{padding-right:1.5rem}.link-grey{color:#515151}.link-grey:hover{color:grey}.codeflask{height:calc(100vh - 60px)!important}.btn-edit-client{background-color:#868686;padding:5px}input[type=number]{width:30px!important;text-align:right;-moz-appearance:textfield}input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{-webkit-appearance:none}.wrapper{padding:1rem}.policy-wrapper{padding-bottom:1.5rem}.policy-title{font-size:1.8rem}.edit-link{padding-top:1rem}</style>
+    <script type="text/javascript" src="caleandar.min.js"></script>
+    <link rel="stylesheet" href="theme3.css"/>
+</head>
+<body>
+    <div>
+        <header>
+            <div class="title-area">
+                <div class="title">
+                    EDM 엔드포인트 정책 공개 페이지
+                </div>
+            </div>
+        </header>
+        <div>
+            <div class="wrapper">
+                <div class="policy-wrapper">
+                    <b>EDM</b>은 <b>Endpoint Device Management</b> 서비스의 약자이며, EDM 사용자로 하여금 <br>
+                    원하는 목표를 자기주도적으로 달성할 수 있도록 도와줍니다. EDM은 사용자가 <br>
+                    자체적으로 설정한 장치 정책을 사용자가 소유한 모든 장치에 적용 및 적용상태를 <br>
+                    감시하여 사용자가 목표 외 다른 활동을 억제할 수 있도록 도와줍니다.<br><br>
+                    아래의 페이지에서는 사용자가 설정한 장치 정책을 공개함으로써 사용자의 관계자<br>
+                    들이 사용시간과 정책을 감시하며 비정상적인 정책은 없는지 확인할 수 있도록 도와줍니다.
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">엔드포인트 장치 관리</div>
+                    <div class="policy-description">등록된 클라이언트 목록입니다. EDM 시스템에 의해 관리될 장치를 뜻합니다.</div>
+                    <table id="tableClients">
+                        <thead>
+                            <tr>
+                                <th scope="col">장치 이름</th>
+                                <th scope="col">장치 ID 지문</th>
+                                <th scope="col">장치 역할</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3">쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">사용 가능 앱</div>
+                    <div class="policy-description">장치 잠금의 상태에 관계 없이 <b>항상 사용할 수 있는</b> 앱들입니다.</div>
+                    <table id="tableAllowedApps">
+                        <thead>
+                            <tr>
+                                <th scope="col" rowspan="2">아이콘</th>
+                                <th scope="col">앱 이름</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">패키지명</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">사용 불가능 앱</div>
+                    <div class="policy-description">장치 잠금의 상태에 관계 없이 <b>항상 사용할 수 없는</b> 앱들입니다.</div>
+                    <table id="tableDisabledApps">
+                        <thead>
+                            <tr>
+                                <th scope="col" rowspan="2">아이콘</th>
+                                <th scope="col">앱 이름</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">패키지명</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">허용된 도메인</div>
+                    <div class="policy-description">잠금모드에서 사용할 수 있는 브라우저의 허용된 사이트 목록입니다. 잠금 여부와 상관없이 <b>항상 사용할 수 있습니다.</b><br>
+                        ('*'는 wildcard, 즉 모든 사이트를 뜻합니다. 예: *.naver.com은 mail.naver.com, dict.naver.com 등 네이버의 모든 하위도메인)</div>
+                    <table id="tableChromeAllowedURL">
+                        <thead>
+                            <tr>
+                                <th scope="col">URL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">차단된 도메인</div>
+                    <div class="policy-description">잠금모드에서 사용할 수 있는 브라우저의 차단된 사이트 목록입니다. 허용된 사이트 외 불특정 다수의 사이트를 차단하는데 사용됩니다.<br>
+                        ('*'는 wildcard, 즉 모든 사이트를 뜻합니다. 예: *.naver.com은 mail.naver.com, dict.naver.com 등 네이버의 모든 하위도메인)</div>
+                    <table id="tableChromeBlockedURL">
+                        <thead>
+                            <tr>
+                                <th scope="col">URL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">사용 가능 시간표</div>
+                    <div class="policy-description">장치를 사용할 수 있는 시간표입니다.</div>
+                    <div class="edit-link"><button type="button" onclick="location.href='/timetable'">확인하기 &#xE001;</button></div>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">사용 가능 시간</div>
+                    <div class="policy-description">요일별로 사용할 수 있는 시간입니다. 해당 시간이 초과되면 자동으로 알림이 가거나 기기가 잠깁니다.</div>
+                    <table id="tableTimeAllowed">
+                        <thead>
+                            <tr>
+                                <th scope="col">-</th>
+                                <th scope="col">일</th>
+                                <th scope="col">월</th>
+                                <th scope="col">화</th>
+                                <th scope="col">수</th>
+                                <th scope="col">목</th>
+                                <th scope="col">금</th>
+                                <th scope="col">토</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8">쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">엔드포인트 장치 정책</div>
+                    <div class="policy-description">사용자 기기 정책입니다. USB 데이터 전송이나 디버깅 모드 등을 허가 및 차단여부를 확인할 수 있습니다.</div>
+                    <table id="tableDevicePolicy">
+                        <thead>
+                            <tr>
+                                <th scope="col">정책 이름</th>
+                                <th scope="col">정책 설명</th>
+                                <th scope="col">활성화 여부</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3">쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">추가 브라우저 정책</div>
+                    <div class="policy-description">잠금모드에서 사용할 수 있는 브라우저의 추가 정책들을 확인할 수 있습니다.</div>
+                    <table id="tableChromeExtraPolicy">
+                        <thead>
+                            <tr>
+                                <th scope="col">정책 이름</th>
+                                <th scope="col">값</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">모든 정책</div>
+                    <div class="policy-description">등록된 엔드포인트 정책 JSON파일을 한번에 확인할 수 있습니다.</div>
+                    <div class="edit-link"><button type="button" onclick="location.href='/allPolicies'">확인하기 &#xE001;</button></div>
+                </div>
+                <div class="policy-wrapper"></div>
+                    <div class="policy-title">사용 내역</div>
+                    <div class="policy-description">2달 전부터 현재까지 사용한 사용시간 내역입니다. 날짜의 사용시간을 클릭하면 세부정보를 볼 수 있습니다.</div>
+                    <div class="p-3" style="height: fit-content; width: fit-content;">
+                        <div id="caleandar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/main.js"></script>
+</body>
+</html>

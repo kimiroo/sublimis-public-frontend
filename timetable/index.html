@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>사용 가능 시간표</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spoqa-han-sans@3.3.0/css/SpoqaHanSansNeo.min.css">
+    <style>button,input[type=password]{font-size:1rem;padding:10px 20px;display:inline-block}.link-grey,.link-grey:active,.link-grey:hover,.link-grey:visited,button{text-decoration:none}header,header button,header input,.wrapper button{font-family:"Spoqa Han Sans Neo","Spoqa Han Sans JP",sans-serif}body{margin:0}header{height:60px!important;display:flex;align-items:center;justify-content:space-between;background:#ddd;color:#333}input[type=password]{margin:8px 0;border:1px solid #ccc;border-radius:4px;box-sizing:border-box}button{background-color:#707070;border:none;color:#fff;text-align:center;border-radius:4px;cursor:pointer}table,td,th{border:1px solid #000;border-collapse:collapse;margin:1rem;}header .submit-area,header .title-area{padding-right:20px;padding-left:20px}header .title-area{display:flex;font-size:1.6rem}.link-home{padding-right:1.5rem}.link-grey{color:#515151}.link-grey:hover{color:grey}.codeflask{height:calc(100vh - 60px)!important}.btn-edit-client{background-color:#868686;padding:5px}input[type=number]{width:30px!important;text-align:right;-moz-appearance:textfield}input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{-webkit-appearance:none}.wrapper{padding:1rem}.policy-wrapper{padding-bottom:1.5rem}.policy-title{font-size:1.8rem}.edit-link{padding-top:1rem}</style>
+</head>
+<body>
+    <div>
+        <header>
+            <div class="title-area">
+                <div class="link-home">
+                    <a href="/" class="link-grey">&#xE000; 홈</a>
+                </div>
+                <div class="title">
+                    사용 가능 시간표
+                </div>
+            </div>
+        </header>
+        <table id="tableTimetable">
+            <thead>
+                <tr>
+                    <th scope="col">시간대</th>
+                    <th scope="col">일</th>
+                    <th scope="col">월</th>
+                    <th scope="col">화</th>
+                    <th scope="col">수</th>
+                    <th scope="col">목</th>
+                    <th scope="col">금</th>
+                    <th scope="col">토</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="8">쿼리 중...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="/timetable/timetable.js"></script>
+</body>
+</html>
