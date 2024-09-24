@@ -1,10 +1,11 @@
 const ready = fn => document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 
 ready(function(){
-    const apiHost = 'http://127.0.0.1:5000';
+    const apiHost = 'https://mdm-api.darak.cc';
     const tableBodyClients = document.querySelector("#tableClients tbody");
     const tableBodyAllowedApps = document.querySelector("#tableAllowedApps tbody");
     const tableBodyDisabledApps = document.querySelector("#tableDisabledApps tbody");
+    const tableBodyUninstallBlockedApps = document.querySelector("#tableUninstallBlockedApps tbody");
     const tableBodyChromeAllowedURL = document.querySelector("#tableChromeAllowedURL tbody");
     const tableBodyChromeBlockedURL = document.querySelector("#tableChromeBlockedURL tbody");
     const tableBodyDevicePolicy = document.querySelector("#tableDevicePolicy tbody");
@@ -28,7 +29,7 @@ ready(function(){
         }
         
         for (client of json) {
-            insert3ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role);
+            insert4ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role, client.state=='enforcing'?'잠금':'잠금해제');
         }
     });
 
@@ -67,6 +68,25 @@ ready(function(){
         
         for (app of json) {
             insertApplicationRow(tableBodyDisabledApps, app.packageName, app.title, app.icon, app.url);
+        }
+    });
+
+    // Fetch UninstallBlockedApps
+    fetch(apiHost + '/api/v1/mdm/public/getUninstallBlockedApps', {
+        method: 'POST',
+    })
+    .then(resp => resp.json())
+    .then(json => {
+
+        if (json.length === 0) {
+            td = tableBodyUninstallBlockedApps.getElementsByTagName('td')[0];
+            td.innerHTML = '없음';
+        } else {
+            tableBodyUninstallBlockedApps.deleteRow(0);
+        }
+        
+        for (app of json) {
+            insertApplicationRow(tableBodyUninstallBlockedApps, app.packageName, app.title, app.icon, app.url);
         }
     });
 
@@ -243,6 +263,27 @@ ready(function(){
 
         cell = row.insertCell();
         text = document.createTextNode(col3);
+        cell.appendChild(text);
+    }
+
+    function insert4ColTableRow(elem, col1, col2, col3, col4) {
+        var row, cell, text;
+        row = elem.insertRow();
+
+        cell = row.insertCell();
+        text = document.createTextNode(col1);
+        cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col2);
+        cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col3);
+        cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col4);
         cell.appendChild(text);
     }
 

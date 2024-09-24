@@ -4,7 +4,7 @@ ready(function(){
     const tableBodyTimetable = document.querySelector("#tableTimetable tbody");
 
     // Fetch TimeLimit
-    fetch('http://127.0.0.1:5000/api/v1/mdm/public/getTimetable', {
+    fetch('https://mdm-api.darak.cc/api/v1/mdm/public/getTimetable', {
         method: 'POST',
     })
     .then(resp => resp.json())

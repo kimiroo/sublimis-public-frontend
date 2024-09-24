@@ -4,7 +4,7 @@ const editorElem = document.getElementById('editor');
 const placeholderElem = document.getElementById('loadingPlaceholder');
 
 // Fetch Policy file
-fetch('http://127.0.0.1:5000/api/v1/mdm/public/allPolicies', {
+fetch('https://mdm-api.darak.cc/api/v1/mdm/public/allPolicies', {
     method: 'POST',
 })
 .then(resp => resp.json())

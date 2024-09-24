@@ -38,11 +38,12 @@
                                 <th scope="col">장치 이름</th>
                                 <th scope="col">장치 ID 지문</th>
                                 <th scope="col">장치 역할</th>
+                                <th scope="col">잠금 상태</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="3">쿼리 중...</td>
+                                <td colspan="4">쿼리 중...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -71,6 +72,26 @@
                     <div class="policy-title">사용 불가능 앱</div>
                     <div class="policy-description">장치 잠금의 상태에 관계 없이 <b>항상 사용할 수 없는</b> 앱들입니다.</div>
                     <table id="tableDisabledApps">
+                        <thead>
+                            <tr>
+                                <th scope="col" rowspan="2">아이콘</th>
+                                <th scope="col">앱 이름</th>
+                            </tr>
+                            <tr>
+                                <th scope="col">패키지명</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">쿼리 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">제거 차단 앱</div>
+                    <div class="policy-description">앱 설치 제거가 차단된 앱들입니다.</div>
+                    <table id="tableUninstallBlockedApps">
                         <thead>
                             <tr>
                                 <th scope="col" rowspan="2">아이콘</th>

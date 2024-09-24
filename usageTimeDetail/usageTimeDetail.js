@@ -7,7 +7,7 @@ ready(function(){
     const date = urlParams.get('date')
 
     // Fetch clients
-    fetch('http://127.0.0.1:5000/api/v1/mdm/public/getUsedTimeDetail', {
+    fetch('https://mdm-api.darak.cc/api/v1/mdm/public/getUsedTimeDetail', {
         method: 'POST',
         headers: new Headers({'content-type': 'application/json'}),
         body: JSON.stringify({'date': date})
