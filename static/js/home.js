@@ -211,21 +211,29 @@ ready(function(){
     .then(json => {
 
         var events = [];
-
+      
         for (day of json) {
-            const hour = Math.floor( day.usageTimeSeconds / (60*60) );
-            const minute = Math.floor( day.usageTimeSeconds / (60) );
-            const eventObj = {
-                'Date': new Date(day.date),
-                'Title': hour + '시간 ' + minute + '분',
-                'Link': '/usageTimeDetail/?date=' + day.dateString
-            };
-            events.push(eventObj);
+      
+          const yyyy = Number(day.dateString.slice(0,4));
+          const mm = Number(day.dateString.slice(5,7));
+          const dd = Number(day.dateString.slice(8,10));
+          
+          const hour = Math.floor( day.usageTimeSeconds / (60*60) );
+          const minute = Math.floor( day.usageTimeSeconds / (60) );
+      
+          const eventObj = {
+              'Date': new Date(yyyy, mm-1, dd),
+              'Title': hour + '시간 ' + minute + '분',
+              //'Link': function(){window.open('/usageTimeDetail/?date=' + day.dateString, '_blank').focus();}
+              'Link': '/usageTimeDetail/?date=' + day.dateString
+          };
+          events.push(eventObj);
         }
-
-        var settings = {};
+      
+        const settings = {};
+      
         caleandar(elementCalaender, events, settings);
-    });
+      });
 
     function insert1ColTableRow(elem, col1) {
         var row, cell, text;
@@ -302,7 +310,7 @@ ready(function(){
         row = elem.insertRow();
 
         cell = row.insertCell();
-        cell.innerHTML = '<a href="' + url + '">' + pkgName + '</a>';
+        cell.innerHTML = '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + pkgName + '</a>';
     }
 
 });
