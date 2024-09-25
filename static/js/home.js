@@ -224,8 +224,8 @@ ready(function(){
           const eventObj = {
               'Date': new Date(yyyy, mm-1, dd),
               'Title': hour + '시간 ' + minute + '분',
-              //'Link': function(){window.open('/usageTimeDetail/?date=' + day.dateString, '_blank').focus();}
-              'Link': '/usageTimeDetail/?date=' + day.dateString
+              'Link': function(){window.open('/usageTimeDetail/?date=' + day.dateString, '_blank').focus();}
+              //'Link': '/usageTimeDetail/?date=' + day.dateString
           };
           events.push(eventObj);
         }
