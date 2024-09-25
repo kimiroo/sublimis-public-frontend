@@ -29,7 +29,14 @@ ready(function(){
         }
         
         for (client of json) {
-            insert4ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role, client.state=='enforcing'?'잠금':'잠금해제');
+            
+            let deviceState;
+            if (client.aliveState == 'alive') {deviceState = '정상'}
+            else if (client.aliveState == 'outdated') {deviceState = '검사한지 오래됨'}
+            else if (client.aliveState == 'inactive') {deviceState = '비활성화'}
+            else {deviceState = '오류'}
+
+            insert6ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role, client.lastAliveTimestamp, deviceState, client.state=='enforcing'?'잠금':'잠금해제');
         }
     });
 
@@ -292,6 +299,35 @@ ready(function(){
 
         cell = row.insertCell();
         text = document.createTextNode(col4);
+        cell.appendChild(text);
+    }
+
+    function insert6ColTableRow(elem, col1, col2, col3, col4, col5, col6) {
+        var row, cell, text;
+        row = elem.insertRow();
+
+        cell = row.insertCell();
+        text = document.createTextNode(col1);
+        cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col2);
+        cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col3);
+        cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col4);
+        cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col5);
+        cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col6);
         cell.appendChild(text);
     }
 
