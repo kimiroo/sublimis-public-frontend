@@ -125,7 +125,7 @@ ready(function(){
         }
         
         for (app of json) {
-            insert1ColTableRow(tableBodyMonitoredSystemApps, app.packageName);
+            insert1ColTableRow(tableBodyMonitoredSystemApps, app);
         }
     });
 
