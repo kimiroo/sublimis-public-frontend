@@ -111,7 +111,7 @@ ready(function(){
     });
 
     // Fetch UninstallBlockedApps
-    fetch(apiHost + '/api/v1/mdm/public/monitoredSystemApps', {
+    fetch(apiHost + '/api/v1/mdm/public/getMonitoredSystemApps', {
         method: 'POST',
     })
     .then(resp => resp.json())
