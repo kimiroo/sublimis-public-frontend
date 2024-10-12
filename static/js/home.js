@@ -37,19 +37,7 @@ ready(function(){
             else if (client.aliveState == 'inactive') {deviceState = '비활성화'}
             else {deviceState = '오류'}
 
-            let lastAliveTimestamp = Date.parse(client.lastAliveTimestamp);
-            lastAliveTimestamp = new Date(lastAliveTimestamp);
-;
-            const year = lastAliveTimestamp.getFullYear();
-            const month = lastAliveTimestamp.getMonth() + 1;
-            const day = lastAliveTimestamp.getDate();
-            const hours = lastAliveTimestamp.getHours();
-            const minutes = lastAliveTimestamp.getMinutes();
-            const seconds = lastAliveTimestamp.getSeconds();
-
-            const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-
-            insert6ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role, formattedDate, deviceState, client.state=='enforcing'?'잠금':'잠금해제');
+            insert7ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role, getFormatedTimestamp(client.registeredTimestamp), getFormatedTimestamp(client.lastAliveTimestamp), deviceState, client.state=='enforcing'?'잠금':'잠금해제');
         }
     });
 
@@ -312,28 +300,7 @@ ready(function(){
         cell.appendChild(text);
     }
 
-    function insert4ColTableRow(elem, col1, col2, col3, col4) {
-        var row, cell, text;
-        row = elem.insertRow();
-
-        cell = row.insertCell();
-        text = document.createTextNode(col1);
-        cell.appendChild(text);
-
-        cell = row.insertCell();
-        text = document.createTextNode(col2);
-        cell.appendChild(text);
-
-        cell = row.insertCell();
-        text = document.createTextNode(col3);
-        cell.appendChild(text);
-
-        cell = row.insertCell();
-        text = document.createTextNode(col4);
-        cell.appendChild(text);
-    }
-
-    function insert6ColTableRow(elem, col1, col2, col3, col4, col5, col6) {
+    function insert7ColTableRow(elem, col1, col2, col3, col4, col5, col6, col7) {
         var row, cell, text;
         row = elem.insertRow();
 
@@ -360,6 +327,10 @@ ready(function(){
         cell = row.insertCell();
         text = document.createTextNode(col6);
         cell.appendChild(text);
+
+        cell = row.insertCell();
+        text = document.createTextNode(col7);
+        cell.appendChild(text);
     }
 
     function insertApplicationRow(elem, pkgName, label, icon, url) {
@@ -380,4 +351,19 @@ ready(function(){
         cell.innerHTML = '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + pkgName + '</a>';
     }
 
+    function getFormatedTimestamp(timestamp) {
+        let timestamp_parsed = Date.parse(timestamp);
+        timestamp_parsed = new Date(timestamp_parsed);
+
+        const year = timestamp_parsed.getFullYear();
+        const month = timestamp_parsed.getMonth() + 1;
+        const day = timestamp_parsed.getDate();
+        const hours = timestamp_parsed.getHours();
+        const minutes = timestamp_parsed.getMinutes();
+        const seconds = timestamp_parsed.getSeconds();
+
+        const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        return formattedDate;
+    }
 });
