@@ -25,7 +25,7 @@ ready(function(){
         }
         
         for (client of json) {
-            insert4ColTableRow(tableBodyUsageTimeDetail, client.sessionIdFingerprint, client.startTimestamp, client.endTimestamp, client.usedTime);
+            insert4ColTableRow(tableBodyUsageTimeDetail, client.sessionIdFingerprint, getFormatedTimestamp(client.startTimestamp), getFormatedTimestamp(client.endTimestamp), client.usedTime);
         }
     });
 
@@ -48,5 +48,21 @@ ready(function(){
         cell = row.insertCell();
         text = document.createTextNode(col4);
         cell.appendChild(text);
+    }
+
+    function getFormatedTimestamp(timestamp) {
+        let timestamp_parsed = Date.parse(timestamp);
+        timestamp_parsed = new Date(timestamp_parsed);
+
+        const year = timestamp_parsed.getFullYear();
+        const month = timestamp_parsed.getMonth() + 1;
+        const day = timestamp_parsed.getDate();
+        const hours = timestamp_parsed.getHours();
+        const minutes = timestamp_parsed.getMinutes();
+        const seconds = timestamp_parsed.getSeconds();
+
+        const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+        return formattedDate;
     }
 });

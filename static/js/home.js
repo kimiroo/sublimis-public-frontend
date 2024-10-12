@@ -6,6 +6,7 @@ ready(function(){
     const tableBodyAllowedApps = document.querySelector("#tableAllowedApps tbody");
     const tableBodyDisabledApps = document.querySelector("#tableDisabledApps tbody");
     const tableBodyUninstallBlockedApps = document.querySelector("#tableUninstallBlockedApps tbody");
+    const tableBodyMonitoredSystemApps = document.querySelector("#tableMonitoredSystemApps tbody");
     const tableBodyChromeAllowedURL = document.querySelector("#tableChromeAllowedURL tbody");
     const tableBodyChromeBlockedURL = document.querySelector("#tableChromeBlockedURL tbody");
     const tableBodyDevicePolicy = document.querySelector("#tableDevicePolicy tbody");
@@ -36,7 +37,19 @@ ready(function(){
             else if (client.aliveState == 'inactive') {deviceState = '비활성화'}
             else {deviceState = '오류'}
 
-            insert6ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role, client.lastAliveTimestamp, deviceState, client.state=='enforcing'?'잠금':'잠금해제');
+            let lastAliveTimestamp = Date.parse(client.lastAliveTimestamp);
+            lastAliveTimestamp = new Date(lastAliveTimestamp);
+;
+            const year = lastAliveTimestamp.getFullYear();
+            const month = lastAliveTimestamp.getMonth() + 1;
+            const day = lastAliveTimestamp.getDate();
+            const hours = lastAliveTimestamp.getHours();
+            const minutes = lastAliveTimestamp.getMinutes();
+            const seconds = lastAliveTimestamp.getSeconds();
+
+            const formattedDate = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+            insert6ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role, formattedDate, deviceState, client.state=='enforcing'?'잠금':'잠금해제');
         }
     });
 
@@ -94,6 +107,25 @@ ready(function(){
         
         for (app of json) {
             insertApplicationRow(tableBodyUninstallBlockedApps, app.packageName, app.title, app.icon, app.url);
+        }
+    });
+
+    // Fetch UninstallBlockedApps
+    fetch(apiHost + '/api/v1/mdm/public/monitoredSystemApps', {
+        method: 'POST',
+    })
+    .then(resp => resp.json())
+    .then(json => {
+
+        if (json.length === 0) {
+            td = tableBodyMonitoredSystemApps.getElementsByTagName('td')[0];
+            td.innerHTML = '없음';
+        } else {
+            tableBodyMonitoredSystemApps.deleteRow(0);
+        }
+        
+        for (app of json) {
+            insert1ColTableRow(tableBodyMonitoredSystemApps, app.packageName);
         }
     });
 
@@ -231,8 +263,7 @@ ready(function(){
           const eventObj = {
               'Date': new Date(yyyy, mm-1, dd),
               'Title': hour + '시간 ' + minute + '분',
-              'Link': function(){window.open('/usageTimeDetail/?date=' + day.dateString, '_blank').focus();}
-              //'Link': '/usageTimeDetail/?date=' + day.dateString
+              'Link': '/usageTimeDetail/?date=' + day.dateString
           };
           events.push(eventObj);
         }
