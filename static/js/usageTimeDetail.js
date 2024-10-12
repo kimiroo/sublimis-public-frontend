@@ -51,6 +51,8 @@ ready(function(){
     }
 
     function getFormatedTimestamp(timestamp) {
+        if (timestamp === '사용 중') {return timestamp;}
+        
         let timestamp_parsed = Date.parse(timestamp);
         timestamp_parsed = new Date(timestamp_parsed);
 
