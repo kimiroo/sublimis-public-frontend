@@ -113,7 +113,7 @@ ready(function(){
         }
         
         for (app of json) {
-            insert1ColTableRow(tableBodyMonitoredSystemApps, 'https://www.google.com/search?q=' + app + '&ie=UTF-8');
+            insert1LinkColTableRow(tableBodyMonitoredSystemApps, app);
         }
     });
 
@@ -261,13 +261,12 @@ ready(function(){
         caleandar(elementCalaender, events, settings);
       });
 
-    function insert1ColTableRow(elem, col1) {
+    function insert1LinkColTableRow(elem, pkgName) {
         var row, cell, text;
         row = elem.insertRow();
 
         cell = row.insertCell();
-        text = document.createTextNode(col1);
-        cell.appendChild(text);
+        cell.innerHTML = '<a href="https://www.google.com/search?q=' + pkgName + '&ie=UTF-8" target="_blank" rel="noopener noreferrer">' + pkgName + '</a>';
     }
 
     function insert2ColTableRow(elem, col1, col2) {
