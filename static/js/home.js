@@ -98,7 +98,7 @@ ready(function(){
         }
     });
 
-    // Fetch UninstallBlockedApps
+    // Fetch MonitoredSystemApps
     fetch(apiHost + '/api/v1/mdm/public/getMonitoredSystemApps', {
         method: 'POST',
     })
@@ -113,7 +113,7 @@ ready(function(){
         }
         
         for (app of json) {
-            insert1ColTableRow(tableBodyMonitoredSystemApps, app);
+            insert1ColTableRow(tableBodyMonitoredSystemApps, 'https://www.google.com/search?q=' + app + '&ie=UTF-8');
         }
     });
 
