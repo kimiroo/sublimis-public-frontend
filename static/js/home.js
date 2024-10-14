@@ -245,12 +245,13 @@ ready(function(){
           const mm = Number(day.dateString.slice(5,7));
           const dd = Number(day.dateString.slice(8,10));
           
-          const hour = Math.floor( day.usageTimeSeconds / (60*60) );
-          const minute = Math.floor( day.usageTimeSeconds / (60) );
+          const hour = day.usageTimeString.split(':')[0];
+          const minute = day.usageTimeString.split(':')[1];
+          const seconds = day.usageTimeString.split(':')[2];
       
           const eventObj = {
               'Date': new Date(yyyy, mm-1, dd),
-              'Title': hour + '시간 ' + minute + '분',
+              'Title': hour + '시간 ' + minute + '분 ' + seconds + '초',
               'Link': '/usageTimeDetail/?date=' + day.dateString
           };
           events.push(eventObj);
