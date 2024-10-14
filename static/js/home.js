@@ -269,6 +269,15 @@ ready(function(){
         cell.innerHTML = '<a href="https://www.google.com/search?q=' + pkgName + '&ie=UTF-8" target="_blank" rel="noopener noreferrer">' + pkgName + '</a>';
     }
 
+    function insert1ColTableRow(elem, col1) {
+        var row, cell, text;
+        row = elem.insertRow();
+
+        cell = row.insertCell();
+        text = document.createTextNode(col1);
+        cell.appendChild(text);
+    }
+
     function insert2ColTableRow(elem, col1, col2) {
         var row, cell, text;
         row = elem.insertRow();
