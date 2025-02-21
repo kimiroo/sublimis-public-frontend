@@ -191,6 +191,23 @@
                     </table>
                 </div>
                 <div class="policy-wrapper">
+                    <div class="policy-title">휴식 시간 정책</div>
+                    <div class="policy-description">잠금 시간동안 휴식을 진행할 수 있는 휴식 시간 정책을 편집합니다.</div>
+                    <table id="tableBreakTimePolicy">
+                        <thead>
+                            <tr>
+                                <th scope="col">최소 잠금 시간</th>
+                                <th scope="col">최대 휴식 시간</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2">불러오는 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
                     <div class="policy-title">엔드포인트 장치 정책</div>
                     <div class="policy-description">사용자 기기 정책입니다. USB 데이터 전송이나 디버깅 모드 등을 허가 및 차단여부를 확인할 수 있습니다.</div>
                     <table id="tableDevicePolicy">
@@ -221,6 +238,24 @@
                         <tbody>
                             <tr>
                                 <td colspan="2">불러오는 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">Private DNS</div>
+                    <div class="policy-description">Private DNS 설정을 확인 및 수정합니다. 잠금 또는 잠금 해제시 접속 가능한 사이트를 외부 DNS 서버를 통해 관리할 수 있습니다.</div>
+                    <table id="tableBreakTimePolicy">
+                        <thread>
+                            <tr>
+                                <th scope="col">잠금 해제시 Private DNS 주소</th>
+                                <th scope="col">잠금 상태시 Private DNS 주소</th>
+                            </tr>
+                        </thread>
+                        <tbody>
+                            <tr>
+                                <td id="textPermissivePrivateDNSHostname">불러오는 중...</td>
+                                <td id="textEnforcingPrivateDNSHostname">불러오는 중...</td>
                             </tr>
                         </tbody>
                     </table>

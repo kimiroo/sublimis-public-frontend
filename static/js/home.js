@@ -12,6 +12,9 @@ ready(function(){
     const tableBodyDevicePolicy = document.querySelector("#tableDevicePolicy tbody");
     const tableBodyChromeExtraPolicy = document.querySelector("#tableChromeExtraPolicy tbody");
     const tableBodyTimeAllowed = document.querySelector("#tableTimeAllowed tbody");
+    const tableBodyBreakTimePolicy = document.querySelector("#tableBreakTimePolicy tbody");
+    const textPermissivePrivateDNSHostname = document.getElementById('textPermissivePrivateDNSHostname');
+    const textEnforcingPrivateDNSHostname = document.getElementById('textEnforcingPrivateDNSHostname');
     const elementCalaender = document.getElementById('caleandar');
     
 
@@ -227,6 +230,56 @@ ready(function(){
                 text = document.createTextNode(hour + '시간 ' + minute + '분');
                 cell.appendChild(text);
             }
+        }
+    });
+
+    // Fetch BreakTimePolicy
+    fetch(apiHost + '/api/v1/mdm/public/getBreakTimePolicy', {
+        method: 'POST',
+    })
+    .then(resp => resp.json())
+    .then(json => {
+
+        if (json.length === 0) {
+            td = tableBodyBreakTimePolicy.getElementsByTagName('td')[0];
+            td.innerHTML = '없음';
+        } else {
+            tableBodyBreakTimePolicy.deleteRow(0);
+        }
+
+        var row, cell, text;
+        row = tableBodyBreakTimePolicy.insertRow();
+
+        // MinimumEnforcingTime
+        hour = Math.floor(json.minimumEnforcingTime / 60)
+        minute = json.minimumEnforcingTime % 60
+
+        cell = row.insertCell();
+        text = document.createTextNode(hour + '시간 ' + minute + '분');
+        cell.appendChild(text);
+
+        // MaximumBreakTime
+        hour = Math.floor(json.maximumBreakTime / 60)
+        minute = json.maximumBreakTime % 60
+
+        cell = row.insertCell();
+        text = document.createTextNode(hour + '시간 ' + minute + '분');
+        cell.appendChild(text);
+    });
+
+    // Fetch PrivateDNS
+    fetch(apiHost + '/api/v1/mdm/public/getPrivateDNS', {
+        method: 'POST',
+    })
+    .then(resp => resp.json())
+    .then(json => {
+
+        if (json.length === 0) {
+            textPermissivePrivateDNSHostname.innerText = '오류 발생';
+            textEnforcingPrivateDNSHostname.innerText = '오류 발생';
+        } else {
+            textPermissivePrivateDNSHostname.innerText = json.permissiveHostname;
+            textEnforcingPrivateDNSHostname.innerText = json.enforcingHostname
         }
     });
 
