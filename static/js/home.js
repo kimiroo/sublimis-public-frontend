@@ -46,9 +46,9 @@ ready(function(){
             else {deviceState = '오류'}
 
             let enforcingState;
-            if (client.state == 'enforcing') {deviceRole = '잠금'}
-            else if (client.state == 'permissive') {deviceRole = '잠금해제'}
-            else {deviceRole = '오류'}
+            if (client.state == 'enforcing') {enforcingState = '잠금'}
+            else if (client.state == 'permissive') {enforcingState = '잠금해제'}
+            else {enforcingState = '오류'}
 
             insert7ColTableRow(tableBodyClients,
                 client.deviceName,
