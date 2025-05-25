@@ -33,6 +33,11 @@ ready(function(){
         }
         
         for (client of json) {
+
+            let deviceRole;
+            if (client.role == 'master') {deviceRole = '주 기기'}
+            else if (client.role == 'master') {deviceRole = '보조 기기'}
+            else {deviceRole = '오류'}
             
             let deviceState;
             if (client.aliveState == 'alive') {deviceState = '정상'}
@@ -40,7 +45,19 @@ ready(function(){
             else if (client.aliveState == 'inactive') {deviceState = '비활성화'}
             else {deviceState = '오류'}
 
-            insert7ColTableRow(tableBodyClients, client.deviceName, client.deviceId, client.role, getFormatedTimestamp(client.registeredTimestamp), getFormatedTimestamp(client.lastAliveTimestamp), deviceState, client.state=='enforcing'?'잠금':'잠금해제');
+            let enforcingState;
+            if (client.state == 'enforcing') {deviceRole = '잠금'}
+            else if (client.state == 'permissive') {deviceRole = '잠금해제'}
+            else {deviceRole = '오류'}
+
+            insert7ColTableRow(tableBodyClients,
+                client.deviceName,
+                client.deviceId,
+                deviceRole,
+                getFormatedTimestamp(client.registeredTimestamp),
+                getFormatedTimestamp(client.lastAliveTimestamp),
+                deviceState,
+                enforcingState);
         }
     });
 
