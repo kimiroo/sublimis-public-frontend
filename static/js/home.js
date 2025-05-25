@@ -36,7 +36,7 @@ ready(function(){
 
             let deviceRole;
             if (client.role == 'master') {deviceRole = '주 기기'}
-            else if (client.role == 'master') {deviceRole = '보조 기기'}
+            else if (client.role == 'slave') {deviceRole = '보조 기기'}
             else {deviceRole = '오류'}
             
             let deviceState;
