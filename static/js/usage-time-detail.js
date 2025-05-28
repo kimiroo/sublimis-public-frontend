@@ -1,14 +1,14 @@
 const ready = fn => document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 
 ready(function(){
-    const tableBodyUsageTimeDetail = document.querySelector("#tableUsageTimeDetail tbody");
+    const tableBodyUsageTimeDetail = document.querySelector("#tableusage-time-detail tbody");
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const date = urlParams.get('date')
 
     // Fetch clients
-    fetch('https://mdm-api.darak.cc/api/v1/mdm/public/getUsedTimeDetail', {
-        method: 'POST',
+    fetch('https://mdm-api.darak.cc/api/v2/mdm/public/used-time-detail', {
+        method: 'GET',
         headers: new Headers({'content-type': 'application/json'}),
         body: JSON.stringify({'date': date})
     })

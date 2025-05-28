@@ -19,8 +19,8 @@ ready(function(){
     
 
     // Fetch clients
-    fetch(apiHost + '/api/v1/mdm/public/getClient', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/client', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -62,8 +62,8 @@ ready(function(){
     });
 
     // Fetch AllowedApps
-    fetch(apiHost + '/api/v1/mdm/public/getAllowedApps', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/allowed-apps', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -81,8 +81,8 @@ ready(function(){
     });
 
     // Fetch DisabledApps
-    fetch(apiHost + '/api/v1/mdm/public/getDisabledApps', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/disabled-apps', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -100,8 +100,8 @@ ready(function(){
     });
 
     // Fetch UninstallBlockedApps
-    fetch(apiHost + '/api/v1/mdm/public/getUninstallBlockedApps', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/uninstall-blocked-apps', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -119,8 +119,8 @@ ready(function(){
     });
 
     // Fetch MonitoredSystemApps
-    fetch(apiHost + '/api/v1/mdm/public/getMonitoredSystemApps', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/monitored-system-apps', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -138,8 +138,8 @@ ready(function(){
     });
 
     // Fetch ChromeDevURLAllowlist
-    fetch(apiHost + '/api/v1/mdm/public/getChromeDevURLAllowlist', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/chrome-dev-url-allowlist', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -157,8 +157,8 @@ ready(function(){
     });
 
     // Fetch ChromeDevURLBlocklist
-    fetch(apiHost + '/api/v1/mdm/public/getChromeDevURLBlocklist', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/chrome-dev-url-blocklist', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -176,8 +176,8 @@ ready(function(){
     });
 
     // Fetch DevicePolicy
-    fetch(apiHost + '/api/v1/mdm/public/getDevicePolicy', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/device-policy', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -195,8 +195,8 @@ ready(function(){
     });
 
     // Fetch ChromeDevExtraPolicy
-    fetch(apiHost + '/api/v1/mdm/public/getChromeDevExtraPolicy', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/chrome-dev-extra-policy', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -214,8 +214,8 @@ ready(function(){
     });
 
     // Fetch TimeLimit
-    fetch(apiHost + '/api/v1/mdm/public/getTimeLimit', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/time-limit', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -251,8 +251,8 @@ ready(function(){
     });
 
     // Fetch BreakTimePolicy
-    fetch(apiHost + '/api/v1/mdm/public/getBreakTimePolicy', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/break-time-policy', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -285,8 +285,8 @@ ready(function(){
     });
 
     // Fetch PrivateDNS
-    fetch(apiHost + '/api/v1/mdm/public/getPrivateDNS', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/private-dns', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -301,8 +301,8 @@ ready(function(){
     });
 
     // Fetch UsedTime
-    fetch(apiHost + '/api/v1/mdm/public/getUsedTime', {
-        method: 'POST',
+    fetch(apiHost + '/api/v2/mdm/public/used-time', {
+        method: 'GET',
     })
     .then(resp => resp.json())
     .then(json => {
@@ -322,7 +322,7 @@ ready(function(){
           const eventObj = {
               'Date': new Date(yyyy, mm-1, dd),
               'Title': hour + '시간 ' + minute + '분 ' + seconds + '초',
-              'Link': '/usageTimeDetail/?date=' + day.dateString
+              'Link': '/usage-time-detail/?date=' + day.dateString
           };
           events.push(eventObj);
         }
