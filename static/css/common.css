@@ -47,7 +47,6 @@ td,
 th {
   border: 1px solid #000;
   border-collapse: collapse;
-  margin: 1rem;
 }
 header .submit-area,
 header .title-area {
@@ -94,4 +93,12 @@ input::-webkit-outer-spin-button {
 }
 .edit-link {
   padding-top: 1rem;
+}
+.policy-description {
+  max-width: 30rem;
+}
+.policy-content {
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 1rem;
 }

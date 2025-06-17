@@ -39,290 +39,312 @@
         <div>
             <div class="wrapper">
                 <div class="policy-wrapper">
-                    <b>EDM</b>은 <b>Endpoint Device Management</b> 서비스의 약자이며, EDM 사용자로 하여금 <br>
-                    원하는 목표를 자기주도적으로 달성할 수 있도록 도와줍니다. EDM은 사용자가 <br>
-                    자체적으로 설정한 장치 정책을 사용자가 소유한 모든 장치에 적용 및 적용상태를 <br>
-                    감시하여 사용자가 목표 외 다른 활동을 억제할 수 있도록 도와줍니다.<br><br>
-                    아래의 페이지에서는 사용자가 설정한 장치 정책을 공개함으로써 사용자의 관계자<br>
-                    들이 사용시간과 정책을 감시하며 비정상적인 정책은 없는지 확인할 수 있도록 도와줍니다.
+                    <div class="policy-description">
+                        <b>EDM</b>은 <b>Endpoint Device Management</b> 서비스의 약자이며, EDM 사용자로 하여금
+                        원하는 목표를 자기주도적으로 달성할 수 있도록 도와줍니다. EDM은 사용자가
+                        자체적으로 설정한 장치 정책을 사용자가 소유한 모든 장치에 적용 및 적용상태를
+                        감시하여 사용자가 목표 외 다른 활동을 억제할 수 있도록 도와줍니다.<br>
+                        아래의 페이지에서는 사용자가 설정한 장치 정책을 공개함으로써 사용자의 관계자
+                        들이 사용시간과 정책을 감시하며 비정상적인 정책은 없는지 확인할 수 있도록 도와줍니다.
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">엔드포인트 장치 관리</div>
                     <div class="policy-description">등록된 클라이언트 목록입니다. EDM 시스템에 의해 관리될 장치를 뜻합니다.</div>
-                    <table id="tableClients">
-                        <thead>
-                            <tr>
-                                <th scope="col">장치 이름</th>
-                                <th scope="col">장치 ID 지문</th>
-                                <th scope="col">장치 역할</th>
-                                <th scope="col">장치가 등록된 시간</th>
-                                <th scope="col">마지막으로 확인된 시간</th>
-                                <th scope="col">장치 상태</th>
-                                <th scope="col">잠금 상태</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="7">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableClients">
+                            <thead>
+                                <tr>
+                                    <th scope="col">장치 이름</th>
+                                    <th scope="col">장치 ID 지문</th>
+                                    <th scope="col">장치 역할</th>
+                                    <th scope="col">장치가 등록된 시간</th>
+                                    <th scope="col">마지막으로 확인된 시간</th>
+                                    <th scope="col">장치 상태</th>
+                                    <th scope="col">잠금 상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="7">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">위치 추적(Geofence) 설정</div>
                     <div class="policy-description">위치 추적(Geofence) 설정을 확인할 수 있습니다.</div>
-                    <table id="tableGeofenceConfig">
-                        <caption>위치 추적 로직 설정</caption>
-                        <tbody>
-                            <tr>
-                                <th>정확도 보정 기준치</th>
-                                <td id="accuracyThreasholdCorrection">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th>최대 허용 오차</th>
-                                <td id="accuracyThreasholdDiscard">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th>보정 거리 증가율 (A)</th>
-                                <td id="correctedOffsetExponentialFactor">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th>보정 거리 조정 배율 (k)</th>
-                                <td id="correctedOffsetScaleFactor">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th>최대 보정 거리 (&Delta;R<sub>max</sub>)</th>
-                                <td id="correctedOffsetMax">불러오는 중...</th>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2">
-                                    <p class="math-formula">
-                                        <strong>[보정 거리 계산 공식]</strong><br>
-                                        1. 오차 계수 E = k &times; (측정된 정확도 &minus; 정확도 보정 기준치)<br>
-                                        2. 보정 거리 &Delta;R<sub>base</sub> = A &times; e<sup>E</sup><br>
-                                        3. 최종 보정 거리 &Delta;R<sub>final</sub> = min(&Delta;R<sub>base</sub>, &Delta;R<sub>max</sub>)<br>
-                                        <strong>[구역(Geofence) 진출입 처리 로직]</strong><br>
-                                        1. &Delta;R<sub>final</sub> = 현재 위치의 GPS 정확도를 바탕으로 계산된 '최종 보정 거리'<br>
-                                        2. R = 구역 (Geofence Zone)의 반경<br>
-                                        3. d = 현재 위치와 구역 중심점간의 거리<br>
-                                        4. d &le; R &plus; &Delta;R<sub>final</sub> 일 경우 구역 진입, 아닐 경우 진출 처리
-                                        <br>
-                                        * 측정 정확도가 '정확도 보정 기준치'보다 낮으면 보정 거리는 0입니다.<br>
-                                        * '최대 허용 오차'는 현재 이 공식에 직접적으로 사용되지는 않습니다.
-                                    </p>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <table id="tableNotification">
-                        <caption>위치 알림 설정</caption>
-                        <tbody>
-                            <tr>
-                                <th rowspan="9">학습 구역 미진입 알림</th>
-                                <th colspan="2">활성화</th>
-                                <td data-section="notEnteredStudyZone" colspan="2" data-field="enabled">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">알림 기준 시간</th>
-                                <td data-section="notEnteredStudyZone" colspan="2" data-field="triggerTime">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">알림 기준 요일</th>
-                                <td data-section="notEnteredStudyZone" colspan="2" data-field="triggerDay">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="6">알림 대상</th>
-                                <th rowspan="2">자신</th>
-                                <td>문자</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="self" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="self" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2">가족</th>
-                                <td>문자</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="family" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="family" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2">친구</th>
-                                <td>문자</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="friend" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="friend" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="7">구역 진출입 알림</th>
-                                <th colspan="2">활성화</th>
-                                <td data-section="zoneChange" colspan="2" data-field="enabled">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="6">알림 대상</th>
-                                <th rowspan="2">자신</th>
-                                <td>문자</td>
-                                <td data-section="zoneChange" data-notification-recipient="self" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="zoneChange" data-notification-recipient="self" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2">가족</th>
-                                <td>문자</td>
-                                <td data-section="zoneChange" data-notification-recipient="family" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="zoneChange" data-notification-recipient="family" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2">친구</th>
-                                <td>문자</td>
-                                <td data-section="zoneChange" data-notification-recipient="friend" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="zoneChange" data-notification-recipient="friend" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table id="tableZoneList">
-                        <caption>구역 목록</caption>
-                        <thead>
-                            <tr>
-                                <th>이름</th>
-                                <th>분류</th>
-                                <th>위도</th>
-                                <th>경도</th>
-                                <th>반경(m)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="5">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableGeofenceConfig">
+                            <caption>위치 추적 로직 설정</caption>
+                            <tbody>
+                                <tr>
+                                    <th>정확도 보정 기준치</th>
+                                    <td id="accuracyThreasholdCorrection">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th>최대 허용 오차</th>
+                                    <td id="accuracyThreasholdDiscard">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th>보정 거리 증가율 (A)</th>
+                                    <td id="correctedOffsetExponentialFactor">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th>보정 거리 조정 배율 (k)</th>
+                                    <td id="correctedOffsetScaleFactor">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th>최대 보정 거리 (&Delta;R<sub>max</sub>)</th>
+                                    <td id="correctedOffsetMax">불러오는 중...</th>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">
+                                        <p class="math-formula">
+                                            <strong>[보정 거리 계산 공식]</strong><br>
+                                            1. 오차 계수 E = k &times; (측정된 정확도 &minus; 정확도 보정 기준치)<br>
+                                            2. 보정 거리 &Delta;R<sub>base</sub> = A &times; e<sup>E</sup><br>
+                                            3. 최종 보정 거리 &Delta;R<sub>final</sub> = min(&Delta;R<sub>base</sub>, &Delta;R<sub>max</sub>)<br>
+                                            <strong>[구역(Geofence) 진출입 처리 로직]</strong><br>
+                                            1. &Delta;R<sub>final</sub> = 현재 위치의 GPS 정확도를 바탕으로 계산된 '최종 보정 거리'<br>
+                                            2. R = 구역 (Geofence Zone)의 반경<br>
+                                            3. d = 현재 위치와 구역 중심점간의 거리<br>
+                                            4. d &le; R &plus; &Delta;R<sub>final</sub> 일 경우 구역 진입, 아닐 경우 진출 처리
+                                            <br>
+                                            * 측정 정확도가 '정확도 보정 기준치'보다 낮으면 보정 거리는 0입니다.<br>
+                                            * '최대 허용 오차'는 현재 이 공식에 직접적으로 사용되지는 않습니다.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="policy-content">
+                        <table id="tableNotification">
+                            <caption>위치 알림 설정</caption>
+                            <tbody>
+                                <tr>
+                                    <th rowspan="9">학습 구역 미진입 알림</th>
+                                    <th colspan="2">활성화</th>
+                                    <td data-section="notEnteredStudyZone" colspan="2" data-field="enabled">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">알림 기준 시간</th>
+                                    <td data-section="notEnteredStudyZone" colspan="2" data-field="triggerTime">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">알림 기준 요일</th>
+                                    <td data-section="notEnteredStudyZone" colspan="2" data-field="triggerDay">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="6">알림 대상</th>
+                                    <th rowspan="2">자신</th>
+                                    <td>문자</td>
+                                    <td data-section="notEnteredStudyZone" data-notification-recipient="self" data-notification-method="sms">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <td>NTFY</td>
+                                    <td data-section="notEnteredStudyZone" data-notification-recipient="self" data-notification-method="ntfy">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2">가족</th>
+                                    <td>문자</td>
+                                    <td data-section="notEnteredStudyZone" data-notification-recipient="family" data-notification-method="sms">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <td>NTFY</td>
+                                    <td data-section="notEnteredStudyZone" data-notification-recipient="family" data-notification-method="ntfy">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2">친구</th>
+                                    <td>문자</td>
+                                    <td data-section="notEnteredStudyZone" data-notification-recipient="friend" data-notification-method="sms">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <td>NTFY</td>
+                                    <td data-section="notEnteredStudyZone" data-notification-recipient="friend" data-notification-method="ntfy">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="7">구역 진출입 알림</th>
+                                    <th colspan="2">활성화</th>
+                                    <td data-section="zoneChange" colspan="2" data-field="enabled">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="6">알림 대상</th>
+                                    <th rowspan="2">자신</th>
+                                    <td>문자</td>
+                                    <td data-section="zoneChange" data-notification-recipient="self" data-notification-method="sms">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <td>NTFY</td>
+                                    <td data-section="zoneChange" data-notification-recipient="self" data-notification-method="ntfy">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2">가족</th>
+                                    <td>문자</td>
+                                    <td data-section="zoneChange" data-notification-recipient="family" data-notification-method="sms">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <td>NTFY</td>
+                                    <td data-section="zoneChange" data-notification-recipient="family" data-notification-method="ntfy">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2">친구</th>
+                                    <td>문자</td>
+                                    <td data-section="zoneChange" data-notification-recipient="friend" data-notification-method="sms">불러오는 중...</td>
+                                </tr>
+                                <tr>
+                                    <td>NTFY</td>
+                                    <td data-section="zoneChange" data-notification-recipient="friend" data-notification-method="ntfy">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="policy-content">
+                        <table id="tableZoneList">
+                            <caption>구역 목록</caption>
+                            <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>분류</th>
+                                    <th>위도</th>
+                                    <th>경도</th>
+                                    <th>반경(m)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">사용 가능 앱</div>
                     <div class="policy-description">장치 잠금의 상태에 관계 없이 <b>항상 사용할 수 있는</b> 앱들입니다.</div>
-                    <table id="tableAllowedApps">
-                        <thead>
-                            <tr>
-                                <th scope="col" rowspan="2">아이콘</th>
-                                <th scope="col">앱 이름</th>
-                            </tr>
-                            <tr>
-                                <th scope="col">패키지명</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableAllowedApps">
+                            <thead>
+                                <tr>
+                                    <th scope="col" rowspan="2">아이콘</th>
+                                    <th scope="col">앱 이름</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">패키지명</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">사용 불가능 앱</div>
                     <div class="policy-description">장치 잠금의 상태에 관계 없이 <b>항상 사용할 수 없는</b> 앱들입니다.</div>
-                    <table id="tableDisabledApps">
-                        <thead>
-                            <tr>
-                                <th scope="col" rowspan="2">아이콘</th>
-                                <th scope="col">앱 이름</th>
-                            </tr>
-                            <tr>
-                                <th scope="col">패키지명</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableDisabledApps">
+                            <thead>
+                                <tr>
+                                    <th scope="col" rowspan="2">아이콘</th>
+                                    <th scope="col">앱 이름</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">패키지명</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">제거 차단 앱</div>
                     <div class="policy-description">앱 설치 제거가 차단된 앱들입니다.</div>
-                    <table id="tableUninstallBlockedApps">
-                        <thead>
-                            <tr>
-                                <th scope="col" rowspan="2">아이콘</th>
-                                <th scope="col">앱 이름</th>
-                            </tr>
-                            <tr>
-                                <th scope="col">패키지명</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableUninstallBlockedApps">
+                            <thead>
+                                <tr>
+                                    <th scope="col" rowspan="2">아이콘</th>
+                                    <th scope="col">앱 이름</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">패키지명</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">감시할 시스템 앱</div>
-                    <div class="policy-description">감시할 시스템 앱 목록입니다. 시스템 앱 전체를 감시/차단할 경우 예상치 못한 오류가 발생할 수 있어<br>
+                    <div class="policy-description">감시할 시스템 앱 목록입니다. 시스템 앱 전체를 감시/차단할 경우 예상치 못한 오류가 발생할 수 있어
                         개별 목록을 통해 관리합니다.</div>
-                    <table id="tableMonitoredSystemApps">
-                        <thead>
-                            <tr>
-                                <th scope="col">패키지명</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableMonitoredSystemApps">
+                            <thead>
+                                <tr>
+                                    <th scope="col">패키지명</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">허용된 도메인</div>
-                    <div class="policy-description">잠금모드에서 사용할 수 있는 브라우저의 허용된 사이트 목록입니다. 잠금 여부와 상관없이 <b>항상 사용할 수 있습니다.</b><br>
+                    <div class="policy-description">잠금모드에서 사용할 수 있는 브라우저의 허용된 사이트 목록입니다. 잠금 여부와 상관없이 <b>항상 사용할 수 있습니다.</b>
                         ('*'는 wildcard, 즉 모든 사이트를 뜻합니다. 예: *.naver.com은 mail.naver.com, dict.naver.com 등 네이버의 모든 하위도메인)</div>
-                    <table id="tableChromeAllowedURL">
-                        <thead>
-                            <tr>
-                                <th scope="col">URL</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableChromeAllowedURL">
+                            <thead>
+                                <tr>
+                                    <th scope="col">URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">차단된 도메인</div>
-                    <div class="policy-description">잠금모드에서 사용할 수 있는 브라우저의 차단된 사이트 목록입니다. 허용된 사이트 외 불특정 다수의 사이트를 차단하는데 사용됩니다.<br>
+                    <div class="policy-description">잠금모드에서 사용할 수 있는 브라우저의 차단된 사이트 목록입니다. 허용된 사이트 외 불특정 다수의 사이트를 차단하는데 사용됩니다.
                         ('*'는 wildcard, 즉 모든 사이트를 뜻합니다. 예: *.naver.com은 mail.naver.com, dict.naver.com 등 네이버의 모든 하위도메인)</div>
-                    <table id="tableChromeBlockedURL">
-                        <thead>
-                            <tr>
-                                <th scope="col">URL</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableChromeBlockedURL">
+                            <thead>
+                                <tr>
+                                    <th scope="col">URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">사용 가능 시간표</div>
@@ -332,95 +354,105 @@
                 <div class="policy-wrapper">
                     <div class="policy-title">사용 가능 시간</div>
                     <div class="policy-description">요일별로 사용할 수 있는 시간입니다. 해당 시간이 초과되면 자동으로 알림이 가거나 기기가 잠깁니다.</div>
-                    <table id="tableTimeAllowed">
-                        <thead>
-                            <tr>
-                                <th scope="col">-</th>
-                                <th scope="col">일</th>
-                                <th scope="col">월</th>
-                                <th scope="col">화</th>
-                                <th scope="col">수</th>
-                                <th scope="col">목</th>
-                                <th scope="col">금</th>
-                                <th scope="col">토</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="8">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableTimeAllowed">
+                            <thead>
+                                <tr>
+                                    <th scope="col">-</th>
+                                    <th scope="col">일</th>
+                                    <th scope="col">월</th>
+                                    <th scope="col">화</th>
+                                    <th scope="col">수</th>
+                                    <th scope="col">목</th>
+                                    <th scope="col">금</th>
+                                    <th scope="col">토</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="8">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">휴식 시간 정책</div>
                     <div class="policy-description">잠금 시간 동안 휴식을 진행할 수 있는 휴식 시간 정책을 편집합니다. 최소 잠금 시간 동안 잠겨있어야 휴식 시작을 시작할 수 있습니다.</div>
-                    <table id="tableBreakTimePolicy">
-                        <thead>
-                            <tr>
-                                <th scope="col">최소 잠금 시간</th>
-                                <th scope="col">최대 휴식 시간</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableBreakTimePolicy">
+                            <thead>
+                                <tr>
+                                    <th scope="col">최소 잠금 시간</th>
+                                    <th scope="col">최대 휴식 시간</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">엔드포인트 장치 정책</div>
                     <div class="policy-description">사용자 기기 정책입니다. USB 데이터 전송이나 디버깅 모드 등을 허가 및 차단여부를 확인할 수 있습니다.</div>
-                    <table id="tableDevicePolicy">
-                        <thead>
-                            <tr>
-                                <th scope="col">정책 이름</th>
-                                <th scope="col">정책 설명</th>
-                                <th scope="col">활성화 여부</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="3">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableDevicePolicy">
+                            <thead>
+                                <tr>
+                                    <th scope="col">정책 이름</th>
+                                    <th scope="col">정책 설명</th>
+                                    <th scope="col">활성화 여부</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">추가 브라우저 정책</div>
                     <div class="policy-description">잠금모드에서 사용할 수 있는 브라우저의 추가 정책들을 확인할 수 있습니다.</div>
-                    <table id="tableChromeExtraPolicy">
-                        <thead>
-                            <tr>
-                                <th scope="col">정책 이름</th>
-                                <th scope="col">값</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="2">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableChromeExtraPolicy">
+                            <thead>
+                                <tr>
+                                    <th scope="col">정책 이름</th>
+                                    <th scope="col">값</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">Private DNS</div>
                     <div class="policy-description">Private DNS 설정을 확인할 수 있습니다. 잠금 또는 잠금 해제시 접속 가능한 사이트를 외부 DNS 서버를 통해 관리할 수 있습니다.</div>
-                    <table id="tableBreakTimePolicy">
-                        <thread>
-                            <tr>
-                                <th scope="col">잠금 해제시 Private DNS 주소</th>
-                                <th scope="col">잠금 상태시 Private DNS 주소</th>
-                            </tr>
-                        </thread>
-                        <tbody>
-                            <tr>
-                                <td id="textPermissivePrivateDNSHostname">불러오는 중...</td>
-                                <td id="textEnforcingPrivateDNSHostname">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="policy-content">
+                        <table id="tableBreakTimePolicy">
+                            <thread>
+                                <tr>
+                                    <th scope="col">잠금 해제시 Private DNS 주소</th>
+                                    <th scope="col">잠금 상태시 Private DNS 주소</th>
+                                </tr>
+                            </thread>
+                            <tbody>
+                                <tr>
+                                    <td id="textPermissivePrivateDNSHostname">불러오는 중...</td>
+                                    <td id="textEnforcingPrivateDNSHostname">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">모든 정책</div>
@@ -429,9 +461,11 @@
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">사용 및 위치 변동 내역</div>
-                    <div class="policy-description">2달 전부터 현재까지 사용한 사용시간 내역과 위치 변동 내역입니다. 날짜의 사용시간을 클릭하면 세부정보를 볼 수 있습니다.<br>
+                    <div class="policy-description">2달 전부터 현재까지 사용한 사용시간 내역과 위치 변동 내역입니다. 날짜의 사용시간을 클릭하면 세부정보를 볼 수 있습니다.
                         사용 내역은 '실제 사용 시간'이 아닌 '잠금 해제 시간'으로 실제 사용한 시간과는 차이가 있을 수 있습니다.</div>
-                    <div id="caleandar"></div>
+                    <div class="policy-content">
+                        <div id="caleandar"></div>
+                    </div>
                 </div>
             </div>
         </div>
