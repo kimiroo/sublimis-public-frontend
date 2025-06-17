@@ -5,7 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>EDM 엔드포인트 정책 공개 페이지</title>
+    <title>EDM 정책 공개 페이지</title>
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="/favicon-128.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="/favicon-180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="/favicon-256.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/spoqa-han-sans@3.3.0/css/SpoqaHanSansNeo.min.css">
     <link rel="stylesheet" href="/static/css/common.css?v=1.0"/>
@@ -18,7 +32,7 @@
         <header>
             <div class="title-area">
                 <div class="title">
-                    EDM 엔드포인트 정책 공개 페이지
+                    EDM 정책 공개 페이지
                 </div>
             </div>
         </header>
@@ -50,6 +64,151 @@
                         <tbody>
                             <tr>
                                 <td colspan="7">불러오는 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="policy-wrapper">
+                    <div class="policy-title">위치 추적(Geofence) 설정</div>
+                    <div class="policy-description">위치 추적(Geofence) 설정을 확인할 수 있습니다.</div>
+                    <table id="tableGeofenceConfig">
+                        <caption>위치 추적 로직 설정</caption>
+                        <tbody>
+                            <tr>
+                                <th>정확도 보정 기준치</th>
+                                <td id="accuracyThreasholdCorrection">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th>최대 허용 오차</th>
+                                <td id="accuracyThreasholdDiscard">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th>보정 거리 증가율 (A)</th>
+                                <td id="correctedOffsetExponentialFactor">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th>보정 거리 조정 배율 (k)</th>
+                                <td id="correctedOffsetScaleFactor">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th>최대 보정 거리 (&Delta;R<sub>max</sub>)</th>
+                                <td id="correctedOffsetMax">불러오는 중...</th>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <p class="math-formula">
+                                        <strong>[보정 거리 계산 공식]</strong><br>
+                                        1. 오차 계수 E = k &times; (측정된 정확도 &minus; 정확도 보정 기준치)<br>
+                                        2. 보정 거리 &Delta;R<sub>base</sub> = A &times; e<sup>E</sup><br>
+                                        3. 최종 보정 거리 &Delta;R<sub>final</sub> = min(&Delta;R<sub>base</sub>, &Delta;R<sub>max</sub>)<br>
+                                        <strong>[구역(Geofence) 진출입 처리 로직]</strong><br>
+                                        1. &Delta;R<sub>final</sub> = 현재 위치의 GPS 정확도를 바탕으로 계산된 '최종 보정 거리'<br>
+                                        2. R = 구역 (Geofence Zone)의 반경<br>
+                                        3. d = 현재 위치와 구역 중심점간의 거리<br>
+                                        4. d &le; R &plus; &Delta;R<sub>final</sub> 일 경우 구역 진입, 아닐 경우 진출 처리
+                                        <br>
+                                        * 측정 정확도가 '정확도 보정 기준치'보다 낮으면 보정 거리는 0입니다.<br>
+                                        * '최대 허용 오차'는 현재 이 공식에 직접적으로 사용되지는 않습니다.
+                                    </p>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <table id="tableNotification">
+                        <caption>위치 알림 설정</caption>
+                        <tbody>
+                            <tr>
+                                <th rowspan="9">학습 구역 미진입 알림</th>
+                                <th colspan="2">활성화</th>
+                                <td data-section="notEnteredStudyZone" colspan="2" data-field="enabled">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">알림 기준 시간</th>
+                                <td data-section="notEnteredStudyZone" colspan="2" data-field="triggerTime">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">알림 기준 요일</th>
+                                <td data-section="notEnteredStudyZone" colspan="2" data-field="triggerDay">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="6">알림 대상</th>
+                                <th rowspan="2">자신</th>
+                                <td>문자</td>
+                                <td data-section="notEnteredStudyZone" data-notification-recipient="self" data-notification-method="sms">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <td>NTFY</td>
+                                <td data-section="notEnteredStudyZone" data-notification-recipient="self" data-notification-method="ntfy">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">가족</th>
+                                <td>문자</td>
+                                <td data-section="notEnteredStudyZone" data-notification-recipient="family" data-notification-method="sms">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <td>NTFY</td>
+                                <td data-section="notEnteredStudyZone" data-notification-recipient="family" data-notification-method="ntfy">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">친구</th>
+                                <td>문자</td>
+                                <td data-section="notEnteredStudyZone" data-notification-recipient="friend" data-notification-method="sms">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <td>NTFY</td>
+                                <td data-section="notEnteredStudyZone" data-notification-recipient="friend" data-notification-method="ntfy">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="7">구역 진출입 알림</th>
+                                <th colspan="2">활성화</th>
+                                <td data-section="zoneChange" colspan="2" data-field="enabled">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="6">알림 대상</th>
+                                <th rowspan="2">자신</th>
+                                <td>문자</td>
+                                <td data-section="zoneChange" data-notification-recipient="self" data-notification-method="sms">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <td>NTFY</td>
+                                <td data-section="zoneChange" data-notification-recipient="self" data-notification-method="ntfy">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">가족</th>
+                                <td>문자</td>
+                                <td data-section="zoneChange" data-notification-recipient="family" data-notification-method="sms">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <td>NTFY</td>
+                                <td data-section="zoneChange" data-notification-recipient="family" data-notification-method="ntfy">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">친구</th>
+                                <td>문자</td>
+                                <td data-section="zoneChange" data-notification-recipient="friend" data-notification-method="sms">불러오는 중...</td>
+                            </tr>
+                            <tr>
+                                <td>NTFY</td>
+                                <td data-section="zoneChange" data-notification-recipient="friend" data-notification-method="ntfy">불러오는 중...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table id="tableZoneList">
+                        <caption>구역 목록</caption>
+                        <thead>
+                            <tr>
+                                <th>이름</th>
+                                <th>분류</th>
+                                <th>위도</th>
+                                <th>경도</th>
+                                <th>반경(m)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5">불러오는 중...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -267,151 +426,6 @@
                     <div class="policy-title">모든 정책</div>
                     <div class="policy-description">등록된 엔드포인트 정책 JSON파일을 한번에 확인할 수 있습니다.</div>
                     <div class="edit-link"><button type="button" onclick="window.open('/all-policies', '_blank').focus()">확인하기 &#xE001;</button></div>
-                </div>
-                <div class="policy-wrapper">
-                    <div class="policy-title">위치 추적(Geofence) 설정</div>
-                    <div class="policy-description">위치 추적(Geofence) 설정을 확인할 수 있습니다.</div>
-                    <table id="tableGeofenceConfig">
-                        <caption>위치 추적 로직 설정</caption>
-                        <tbody>
-                            <tr>
-                                <th>정확도 보정 기준치</th>
-                                <td id="accuracyThreasholdCorrection">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th>최대 허용 오차</th>
-                                <td id="accuracyThreasholdDiscard">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th>보정 거리 증가율 (A)</th>
-                                <td id="correctedOffsetExponentialFactor">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th>보정 거리 조정 배율 (k)</th>
-                                <td id="correctedOffsetScaleFactor">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th>최대 보정 거리 (&Delta;R<sub>max</sub>)</th>
-                                <td id="correctedOffsetMax">불러오는 중...</th>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="2">
-                                    <p class="math-formula">
-                                        <strong>[보정 거리 계산 공식]</strong><br>
-                                        1. 오차 계수 E = k &times; (측정된 정확도 &minus; 정확도 보정 기준치)<br>
-                                        2. 보정 거리 &Delta;R<sub>base</sub> = A &times; e<sup>E</sup><br>
-                                        3. 최종 보정 거리 &Delta;R<sub>final</sub> = min(&Delta;R<sub>base</sub>, &Delta;R<sub>max</sub>)<br>
-                                        <strong>[구역(Geofence) 진출입 처리 로직]</strong><br>
-                                        1. &Delta;R<sub>final</sub> = 현재 위치의 GPS 정확도를 바탕으로 계산된 '최종 보정 거리'<br>
-                                        2. R = 구역 (Geofence Zone)의 반경<br>
-                                        3. d = 현재 위치와 구역 중심점간의 거리<br>
-                                        4. d &le; R &plus; &Delta;R<sub>final</sub> 일 경우 구역 진입, 아닐 경우 진출 처리
-                                        <br>
-                                        * 측정 정확도가 '정확도 보정 기준치'보다 낮으면 보정 거리는 0입니다.<br>
-                                        * '최대 허용 오차'는 현재 이 공식에 직접적으로 사용되지는 않습니다.
-                                    </p>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                    <table id="tableNotification">
-                        <caption>위치 알림 설정</caption>
-                        <tbody>
-                            <tr>
-                                <th rowspan="9">학습 구역 미진입 알림</th>
-                                <th colspan="2">활성화</th>
-                                <td data-section="notEnteredStudyZone" colspan="2" data-field="enabled">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">알림 기준 시간</th>
-                                <td data-section="notEnteredStudyZone" colspan="2" data-field="triggerTime">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">알림 기준 요일</th>
-                                <td data-section="notEnteredStudyZone" colspan="2" data-field="triggerDay">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="6">알림 대상</th>
-                                <th rowspan="2">자신</th>
-                                <td>문자</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="self" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="self" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2">가족</th>
-                                <td>문자</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="family" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="family" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2">친구</th>
-                                <td>문자</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="friend" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="notEnteredStudyZone" data-notification-recipient="friend" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="7">구역 진출입 알림</th>
-                                <th colspan="2">활성화</th>
-                                <td data-section="zoneChange" colspan="2" data-field="enabled">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="6">알림 대상</th>
-                                <th rowspan="2">자신</th>
-                                <td>문자</td>
-                                <td data-section="zoneChange" data-notification-recipient="self" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="zoneChange" data-notification-recipient="self" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2">가족</th>
-                                <td>문자</td>
-                                <td data-section="zoneChange" data-notification-recipient="family" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="zoneChange" data-notification-recipient="family" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="2">친구</th>
-                                <td>문자</td>
-                                <td data-section="zoneChange" data-notification-recipient="friend" data-notification-method="sms">불러오는 중...</td>
-                            </tr>
-                            <tr>
-                                <td>NTFY</td>
-                                <td data-section="zoneChange" data-notification-recipient="friend" data-notification-method="ntfy">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table id="tableZoneList">
-                        <caption>구역 목록</caption>
-                        <thead>
-                            <tr>
-                                <th>이름</th>
-                                <th>분류</th>
-                                <th>위도</th>
-                                <th>경도</th>
-                                <th>반경(m)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td colspan="5">불러오는 중...</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
                 <div class="policy-wrapper">
                     <div class="policy-title">사용 및 위치 변동 내역</div>
