@@ -1,7 +1,7 @@
 const ready = fn => document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 
 ready(function () {
-    const apiHost = 'https://mdm.darak.cc';
+    const apiHost = 'https://mdm-api.darak.cc';
     const tableBodyClients = document.querySelector("#tableClients tbody");
     const tableBodyAllowedApps = document.querySelector("#tableAllowedApps tbody");
     const tableBodyDisabledApps = document.querySelector("#tableDisabledApps tbody");

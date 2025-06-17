@@ -1,5 +1,6 @@
 import CodeFlask from 'codeflask';
 
+const apiHost = 'https://mdm-api.darak.cc';
 const editorElem = document.getElementById('editor');
 const placeholderElem = document.getElementById('loadingPlaceholder');
 

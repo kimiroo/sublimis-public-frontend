@@ -1,4 +1,4 @@
-const apiHost = 'http://127.0.0.1:5000';
+const apiHost = 'https://mdm-api.darak.cc';
 const redirectUrl = 'https://mdm.darak.cc';
 const textExceptionType = document.getElementById('textExceptionType');
 const textExceptionTime = document.getElementById('textExceptionTime');
@@ -45,7 +45,7 @@ function getExceptionUsageInfo() {
                 textExceptionTime.innerText = '오류 발생';
                 textExceptionReason.innerText = '오류 발생';
                 alert('올바르지 않거나 만료된 링크입니다.');
-                //window.location.href = redirectUrl;
+                window.location.href = redirectUrl;
             }
         })
         .catch(() => {
@@ -53,7 +53,7 @@ function getExceptionUsageInfo() {
             textExceptionTime.innerText = '오류 발생';
             textExceptionReason.innerText = '오류 발생';
             alert('올바르지 않거나 만료된 링크입니다.');
-            //window.location.href = redirectUrl;
+            window.location.href = redirectUrl;
         });
 }
 
@@ -71,15 +71,15 @@ function sendApprovalResult(isApproved) {
 
             if (json.result === 'success') {
                 alert('처리되었습니다.');
-                //window.location.href = redirectUrl;
+                window.location.href = redirectUrl;
             } else {
                 alert('오류가 발생했습니다.');
-                //window.location.href = redirectUrl;
+                window.location.href = redirectUrl;
             }
         })
         .catch(() => {
             alert('오류가 발생했습니다.');
-            //window.location.href = redirectUrl;
+            window.location.href = redirectUrl;
         });
 }
 

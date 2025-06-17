@@ -1,7 +1,7 @@
 const ready = fn => document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 
 ready(function(){
-    const apiHost = 'https://mdm.darak.cc';
+    const apiHost = 'https://mdm-api.darak.cc';
     const tableBodyUsageTimeDetail = document.querySelector("#tableUsageTimeDetail tbody");
     const tableZoneHistory = document.querySelector("#tableZoneHistory tbody");
     const queryString = window.location.search;
