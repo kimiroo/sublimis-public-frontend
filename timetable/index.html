@@ -36,25 +36,35 @@
                 </div>
             </div>
         </header>
-        <table id="tableTimetable">
-            <thead>
-                <tr>
-                    <th scope="col">시간대</th>
-                    <th scope="col">일</th>
-                    <th scope="col">월</th>
-                    <th scope="col">화</th>
-                    <th scope="col">수</th>
-                    <th scope="col">목</th>
-                    <th scope="col">금</th>
-                    <th scope="col">토</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="8">불러오는 중...</td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+            <div class="wrapper">
+                <div class="policy-wrapper">
+                    <div class="policy-title">사용 가능 시간표</div>
+                    <div class="policy-description">장치를 사용할 수 있는 시간표입니다. '허용'표시된 시간에만 장치를 사용할 수 있으며, 이외의 시간에는 모든 장치가 자동으로 잠깁니다.</div>
+                    <div class="policy-content">
+                        <table id="tableTimetable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">시간대</th>
+                                    <th scope="col">일</th>
+                                    <th scope="col">월</th>
+                                    <th scope="col">화</th>
+                                    <th scope="col">수</th>
+                                    <th scope="col">목</th>
+                                    <th scope="col">금</th>
+                                    <th scope="col">토</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="8">불러오는 중...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="/static/js/timetable.js?v=1.0"></script>
 </body>
