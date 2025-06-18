@@ -105,6 +105,8 @@ input::-webkit-outer-spin-button {
   white-space: nowrap;
   margin-top: 1rem;
 }
-.title-small {
-  font-size: 1.35rem;
+@media screen and (max-width: 480px) {
+  .title-small {
+    font-size: 1.35rem !important;
+  }
 }
