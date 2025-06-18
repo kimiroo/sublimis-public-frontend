@@ -3,7 +3,7 @@
 }
 button,
 input[type="password"] {
-  font-size: 1rem;
+  font-size: 1em;
   padding: 10px 20px;
   display: inline-block;
 }
@@ -58,7 +58,7 @@ header .title-area {
 }
 header .title-area {
   display: flex;
-  font-size: 1.6rem;
+  font-size: 1.6em;
 }
 .link-home {
   padding-right: 1.5rem;
@@ -92,7 +92,7 @@ input::-webkit-outer-spin-button {
   padding-bottom: 1.5rem;
 }
 .policy-title {
-  font-size: 1.8rem;
+  font-size: 1.8em;
 }
 .edit-link {
   padding-top: 1rem;
@@ -104,4 +104,7 @@ input::-webkit-outer-spin-button {
   overflow-x: auto;
   white-space: nowrap;
   margin-top: 1rem;
+}
+.title-small {
+  font-size: 1.35em;
 }
