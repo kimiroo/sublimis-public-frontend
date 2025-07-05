@@ -332,8 +332,8 @@ ready(function () {
                 textAccuracyThreasholdCorrection.innerText = json.geofenceLogicSettings.accuracyThreasholdCorrection;
                 textAccuracyThreasholdDiscard.innerText = json.geofenceLogicSettings.accuracyThreasholdDiscard;
                 textCorrectedOffsetExponentialFactor.innerText = json.geofenceLogicSettings.correctedOffsetExponentialFactor;
-                textCorrectedOffsetScaleFactor.innerText = json.geofenceLogicSettings.correctedOffsetMax;
-                textCorrectedOffsetMax.innerText = json.geofenceLogicSettings.correctedOffsetScaleFactor;
+                textCorrectedOffsetScaleFactor.innerText = json.geofenceLogicSettings.correctedOffsetScaleFactor;
+                textCorrectedOffsetMax.innerText = json.geofenceLogicSettings.correctedOffsetMax;
 
                 // tableNotification
                 updateNotificationSection('notEnteredStudyZone', json.notification.notEnteredStudyZone);
